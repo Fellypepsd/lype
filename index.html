@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>fel[lype] ferreira / portfólio</title>
+<style>
+  :root{
+    --bg-dark: #191514;
+    --white: #ffffff;
+    --accent-red: #fb022d;
+    --accent-red-light: #ff3a56;
+    --accent-maroon: #720521;
+    --overlay-grey: rgba(63,60,59,0.35);
+    --overlay-white: rgba(255,255,255,0.08);
+    --text-onwhite: #160f0f;
+    --radius: 8px;
+    --container: 1020px;
+    --font-display: "ZT Nature", sans-serif;
+    --font-pixel: "Press Start 2P", monospace;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+      var(--bg-dark);
+    background-size: 26px 26px, 26px 26px, auto;
+    color:var(--white);
+    font-family:var(--font-display);
+    line-height:1.35;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  img{ max-width:100%; display:block; }
+
+  a, button{ color:inherit; text-decoration:none; }
+
+  .wrap{
+    max-width:var(--container);
+    margin-inline:auto;
+    padding-inline:1.25rem;
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--white);
+    outline-offset:3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+
+  /* ---------- HEADER ---------- */
+  header.site-header{
+    background:var(--accent-red);
+    padding:0rem 0;
+  }
+  .site-header .wrap{
+    max-width:1222px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:1.5rem;
+  }
+  .logo-mark{ display:flex; align-items:center; }
+  .logo-mark img{ height:100px; width:auto; }
+  nav.primary-nav ul{
+    list-style:none;
+    display:flex;
+    gap:clamp(1rem,3vw,3.6rem);
+    flex-wrap:wrap;
+  }
+  nav.primary-nav a{
+    font-size:clamp(1rem,1.6vw,1.4rem);
+    font-weight:400;
+  }
+  nav.primary-nav a.is-current{ font-weight:700; }
+  nav.primary-nav a:hover{ opacity:0.75; }
+
+  @media (max-width:760px){
+    header.site-header{ padding:0.9rem 0; }
+    .site-header .wrap{
+      justify-content:center;
+      gap:0.8rem;
+    }
+    .logo-mark{ width:100%; justify-content:center; }
+    .logo-mark img{ height:72px; }
+    nav.primary-nav{ width:100%; }
+    nav.primary-nav ul{
+      justify-content:center;
+      gap:0.8rem 1.2rem;
+    }
+    nav.primary-nav a{
+      font-size:0.95rem;
+      letter-spacing:0.02em;
+    }
+  }
+
+  /* ---------- GLASS / LCD PIXEL TRAIL EFFECT ---------- */
+  .glass{
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+    --mx: 50%;
+    --my: 50%;
+    --glow-opacity: 0;
+    backdrop-filter: blur(8px) saturate(1.1);
+    -webkit-backdrop-filter: blur(8px) saturate(1.1);
+  }
+  .glass::before{
+    content:"";
+    position:absolute;
+    inset:-8%;
+    z-index:0;
+    background:
+      radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(251,2,45,0.8) 0 6%, rgba(251,2,45,0.38) 10%, rgba(251,2,45,0.12) 16%, transparent 28%),
+      repeating-linear-gradient(
+        90deg,
+        rgba(251,2,45,0.08) 0 1.5px,
+        rgba(251,2,45,0.01) 1.5px 4px,
+        transparent 4px 14px
+      ),
+      radial-gradient(circle at calc(var(--mx,50%) + 6%) calc(var(--my,50%) - 6%), rgba(251,2,45,0.14), transparent 16%);
+    opacity: var(--glow-opacity, 0);
+    transition: opacity .25s ease;
+    pointer-events:none;
+    filter: blur(1.5px) contrast(1.1);
+    mix-blend-mode: screen;
+    background-size: 100% 100%, 22px 22px, 100% 100%;
+    background-repeat: no-repeat, repeat, no-repeat;
+  }
+  .glass:hover::before, .glass.is-glowing::before{ opacity:1; }
+  .glass > *{ position:relative; z-index:1; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:clamp(3rem,6vw,6.5rem) 0 4rem;
+    position:relative;
+  }
+  .hero .wrap{ position:relative; }
+
+  .window-tab{
+    display:flex;
+    align-items:center;
+    gap:0.6rem;
+    font-size:1.1rem;
+    color:var(--white);
+    margin-bottom:2rem;
+    opacity:0.9;
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1.5rem;
+  }
+  @media (max-width:760px){
+    .hero-grid{ grid-template-columns:1fr; }
+  }
+
+  .hero-card{
+    border-radius:var(--radius);
+    padding:1.4rem 2.1rem 1.6rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:0.6rem;
+    min-height:260px;
+  }
+  .hero-card.card-white{ background:var(--overlay-white); }
+  .hero-card.card-grey{ background:var(--overlay-grey); }
+  .hero-card h2{
+    font-style:italic;
+    font-weight:700;
+    font-size:clamp(1.4rem,2.4vw,1.9rem);
+    margin-top:0;
+    margin-bottom:0.15rem;
+    line-height:1.1;
+  }
+  .hero-card p{
+    font-size:clamp(0.95rem,1.4vw,1.15rem);
+    font-weight:500;
+    max-width:34ch;
+    opacity:0.92;
+    margin:0;
+  }
+
+  .photo-tile{
+    border-radius:var(--radius);
+    overflow:hidden;
+    aspect-ratio:1/1;
+    position:relative;
+    background:#100d0c;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .photo-tile img{
+    width:100%; height:100%; object-fit:cover; object-position:center center;
+  }
+  .photo-tile.on-red{ background:var(--accent-red); }
+  .photo-tile.on-red img{
+    object-fit:contain;
+    padding:1.6rem;
+  }
+
+  .destaque-stack{ position:relative; width:100%; height:100%; }
+  .destaque-stack img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:contain;
+    padding:1.6rem;
+    opacity:0;
+    animation: destaqueSwitch 2.4s infinite steps(1, end);
+  }
+  .destaque-stack img:nth-child(1){ animation-delay: 0s; }
+  .destaque-stack img:nth-child(2){ animation-delay: 0.48s; }
+  .destaque-stack img:nth-child(3){ animation-delay: 0.96s; }
+  .destaque-stack img:nth-child(4){ animation-delay: 1.44s; }
+  .destaque-stack img:nth-child(5){ animation-delay: 1.92s; }
+
+  @keyframes destaqueSwitch{
+    0%, 18% { opacity:1; }
+    20%, 100% { opacity:0; }
+  }
+
+  .social-row{
+    margin-top:2.2rem;
+    display:flex;
+    align-items:center;
+    gap:1.4rem;
+    flex-wrap:wrap;
+    font-size:clamp(1rem,1.6vw,1.4rem);
+  }
+  .social-row .btn-contato{
+    font-weight:700;
+    font-style:italic;
+  }
+  .social-row .divider{
+    letter-spacing:2px;
+    opacity:0.5;
+    overflow:hidden;
+    white-space:nowrap;
+    flex:1 1 auto;
+    min-width:2rem;
+  }
+  .social-row a:hover{ opacity:0.7; }
+
+  .easter-egg{
+    position:absolute;
+    top:0.5rem;
+    right:1.25rem;
+    font-family:var(--font-pixel);
+    font-size:0.72rem;
+    line-height:1.2;
+    color:var(--white);
+    max-width:11rem;
+    text-align:right;
+    opacity:0.85;
+    z-index:2;
+    background:none;
+    border:none;
+    padding:0;
+    white-space:nowrap;
+  }
+  .easter-egg:hover{ opacity:1; color:var(--accent-red-light); }
+  .easter-egg.is-playing{ color:var(--accent-red-light); opacity:1; }
+  @media (max-width:900px){ .easter-egg{ display:none; } }
+
+  /* ---------- RECENT WORK ---------- */
+  .work{
+    padding:2rem 0 5rem;
+  }
+  .work h2{
+    font-weight:700;
+    font-size:clamp(1.6rem,3vw,2rem);
+    margin-bottom:2.2rem;
+  }
+  .work-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.5rem;
+  }
+  @media (max-width:820px){
+    .work-grid{ grid-template-columns:1fr; }
+  }
+  .work-card{
+    position:relative;
+    border-radius:var(--radius);
+    min-height:420px;
+    padding:2.6rem 1.8rem 1.8rem 2.4rem;
+    display:flex;
+    align-items:flex-end;
+    justify-content:flex-end;
+    overflow:hidden;
+    background-size:cover;
+    background-position:center;
+    isolation:isolate;
+  }
+  .work-card::before{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(15,12,11,0.05) 40%, rgba(10,8,7,0.85) 100%);
+    z-index:0;
+    transition:background .25s ease;
+  }
+  .work-card:hover::before{
+    background:linear-gradient(180deg, rgba(15,12,11,0.15) 30%, rgba(10,8,7,0.9) 100%);
+  }
+  .work-card span{
+    position:relative; z-index:1;
+    font-weight:700;
+    font-size:clamp(1.4rem,2.2vw,1.9rem);
+  }
+
+  /* ---------- CLIENTS ---------- */
+  .clients{
+    background:var(--white);
+    color:var(--text-onwhite);
+    padding:3.5rem 0 4.3rem;
+  }
+  .clients h2{
+    text-align:center;
+    font-weight:700;
+    font-size:clamp(1.4rem,2.4vw,1.9rem);
+    margin-bottom:2.6rem;
+  }
+  .client-row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
+    gap:2.4rem 3rem;
+  }
+  .client-logo{
+    height:56px;
+    min-width:64px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.75rem;
+    font-weight:700;
+    letter-spacing:0.02em;
+    color:#8a8582;
+    border:1px dashed #d8d3ce;
+    border-radius:6px;
+    padding:0.5rem 1rem;
+    filter:grayscale(1);
+    opacity:0.75;
+    transition:opacity 0.2s ease, filter 0.2s ease;
+  }
+  .client-logo:hover{ opacity:1; filter:none; }
+
+  /* ---------- CTA ---------- */
+  .cta{
+    padding:4rem 0 6rem;
+  }
+  .cta .wrap{
+    position:relative;
+  }
+  .cta-panel{
+    position:relative;
+    background:var(--overlay-white);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:var(--radius);
+    padding:clamp(2.5rem,6vw,4rem);
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:1rem;
+  }
+  .cta-sticker{
+    position:absolute;
+    z-index:3;
+    width:min(30vw, 310px);
+    max-width:310px;
+    height:auto;
+    pointer-events:none;
+    filter:drop-shadow(0 8px 12px rgba(0,0,0,0.15));
+  }
+  .cta-sticker.left{
+    left:-110px;
+    top:50%;
+    transform:translateY(-50%) rotate(-12deg);
+  }
+  .cta-sticker.right{
+    right:-110px;
+    top:-28px;
+    transform:rotate(10deg);
+  }
+  @media (max-width:760px){
+    .cta{ padding:3.2rem 0 4.5rem; }
+    .cta-panel{
+      padding-top:4.8rem;
+      padding-bottom:2.2rem;
+    }
+    .cta-sticker{
+      width:min(34vw, 250px);
+      max-width:250px;
+      opacity:1;
+    }
+    .cta-sticker.left{
+      left:50%;
+      top:-30px;
+      transform:translateX(-50%) rotate(-10deg) scale(1.5);
+      transform-origin: center center;
+    }
+    .cta-sticker.right{
+      display:none;
+    }
+  }
+  .cta-panel h2{
+    font-style:italic;
+    font-weight:700;
+    font-size:clamp(1.9rem,4vw,2.9rem);
+  }
+  .cta-panel p{
+    font-weight:500;
+    font-size:clamp(1rem,1.8vw,1.35rem);
+    max-width:40ch;
+    opacity:0.92;
+  }
+
+  /* spacebar-style button */
+  .cta-button{
+    display:block;
+    width:100%;
+    max-width:640px;
+    margin-top:2.4rem;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(180deg, var(--accent-red-light), var(--accent-red) 60%, #d90027);
+    padding:1.5rem 1rem;
+    text-align:center;
+    font-family:var(--font-display);
+    font-style:italic;
+    font-weight:700;
+    font-size:clamp(1.2rem,2.6vw,1.7rem);
+    color:var(--white);
+    box-shadow:
+      0 7px 0 var(--accent-maroon),
+      0 12px 18px rgba(0,0,0,0.35),
+      inset 0 1px 0 rgba(255,255,255,0.45);
+    transform:translateY(0);
+    transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  }
+  .cta-button:hover{
+    transform:translateY(3px);
+    box-shadow:
+      0 4px 0 var(--accent-maroon),
+      0 8px 12px rgba(0,0,0,0.32),
+      inset 0 1px 0 rgba(255,255,255,0.4);
+    filter:brightness(1.04);
+  }
+  .cta-button:active{
+    transform:translateY(7px);
+    box-shadow:
+      0 0 0 var(--accent-maroon),
+      0 2px 6px rgba(0,0,0,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer.site-footer{
+    padding:2.5rem 0 3rem;
+    text-align:center;
+    font-size:0.9rem;
+    opacity:0.55;
+  }
+
+  /* ---------- SNAKE GAME OVERLAY ---------- */
+  body{ position:relative; }
+  main, header, footer{ position:relative; z-index:1; }
+  #snake-overlay{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    display:none;
+    background:transparent;
+    pointer-events:none;
+  }
+  #snake-overlay.active{ display:block; }
+  #snake-canvas{
+    display:block;
+    width:100%;
+    height:100%;
+    background:transparent;
+    pointer-events:none;
+    opacity:0.9;
+  }
+  #snake-msg{
+    position:fixed;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    font-family:var(--font-pixel);
+    font-size:0.85rem;
+    line-height:2;
+    color:var(--white);
+    background:rgba(10,8,7,0.75);
+    border:2px solid var(--accent-red);
+    border-radius:8px;
+    padding:1.5rem 2rem;
+    display:none;
+    z-index:10000;
+  }
+  #snake-msg.show{ display:block; }
+  #snake-msg .hint{ color:var(--accent-red-light); font-size:0.65rem; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo-mark" href="#inicio" aria-label="fel[lype] ferreira — início">
+      <img src="assets/img/logo.png" alt="fel[lype] ferreira">
+    </a>
+    <nav class="primary-nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="index.html" class="is-current">início</a></li>
+        <li><a href="fotografia.html">fotografia</a></li>
+        <li><a href="design.html">design</a></li>
+        <li><a href="conteudo.html">conteúdo</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="inicio">
+    <div class="wrap">
+      <button type="button" class="easter-egg" id="playSnake">quer jogar? clica em mim ;)</button>
+
+      <p class="window-tab">fel[lype] ferreira / portfólio.html</p>
+
+      <div class="hero-grid">
+        <div class="photo-tile">
+          <img src="assets/img/foto-perfil.jpg" alt="Foto de perfil de Fellype Ferreira">
+        </div>
+
+        <div class="hero-card card-white glass">
+          <h2>sobre mim</h2>
+          <p>Sendo um aficionado por criação, aplico meus conhecimentos colecionados ao longo da vida em frentes criativas plurais. Fotógrafo, diretor de arte, designer e criador de conteúdo, busco sempre me aprimorar e me posicionar como artista multimídia.</p>
+        </div>
+
+        <div class="hero-card card-grey glass">
+          <h2>onde atuo?</h2>
+          <p>Sendo um aficionado por criação, aplico meus conhecimentos colecionados ao longo da vida em frentes criativas plurais. Fotógrafo, diretor de arte, designer e criador de conteúdo, busco sempre me aprimorar e me posicionar como artista multimídia.</p>
+        </div>
+
+        <div class="photo-tile on-red">
+          <div class="destaque-stack" role="img" aria-label="Ilustrações em destaque do trabalho de Fellype">
+            <img src="assets/img/destaque-1.png" alt="">
+            <img src="assets/img/destaque-2.png" alt="">
+            <img src="assets/img/destaque-3.png" alt="">
+            <img src="assets/img/destaque-4.png" alt="">
+            <img src="assets/img/destaque-5.png" alt="">
+          </div>
+        </div>
+      </div>
+
+      <div class="social-row">
+        <a href="#contato" class="btn-contato">contato</a>
+        <a href="#" target="_blank" rel="noopener">[instagram]</a>
+        <a href="#" target="_blank" rel="noopener">[linkedin]</a>
+        <a href="mailto:contato@fellype.com">[e-mail]</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="work">
+    <div class="wrap">
+      <h2>trabalhos recentes</h2>
+      <div class="work-grid">
+        <a class="work-card" id="fotografia" href="fotografia.html" style="background-image:url('assets/img/card-fotografia.jpg')">
+          <span>fotografia</span>
+        </a>
+        <a class="work-card" id="design" href="design.html" style="background-image:url('assets/img/card-design.jpg')">
+          <span>design</span>
+        </a>
+        <a class="work-card" id="conteudo" href="conteudo.html" style="background-image:url('assets/img/card-conteudo.jpg')">
+          <span>conteúdo</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="clients">
+    <div class="wrap">
+      <h2>[Já trabalhei com]</h2>
+      <div class="client-row">
+        <div class="client-logo">logo 01</div>
+        <div class="client-logo">logo 02</div>
+        <div class="client-logo">logo 03</div>
+        <div class="client-logo">KAIAK</div>
+        <div class="client-logo">logo 05</div>
+        <div class="client-logo">logo 06</div>
+        <div class="client-logo">logo 07</div>
+        <div class="client-logo">logo 08</div>
+        <div class="client-logo">logo 09</div>
+        <div class="client-logo">logo 10</div>
+        <div class="client-logo">logo 11</div>
+        <div class="client-logo">logo 12</div>
+        <div class="client-logo">logo 13</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contato">
+    <div class="wrap">
+      <img class="cta-sticker left" src="Adesivos-01.png" alt="Sticker decorativo esquerdo">
+      <img class="cta-sticker right" src="Adesivos-02.png" alt="Sticker decorativo direito">
+      <div class="cta-panel glass">
+        <h2>vamo criar junto?</h2>
+        <p>Me conta a sua ideia para colocarmos ela no mundo! Crie um orçamento rapidinho respondendo algumas poucas perguntas ;)</p>
+
+        <a class="cta-button" href="orcamento.html">Dê forma a suas ideias</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    fel[lype] ferreira — feito com carinho
+  </div>
+</footer>
+
+<!-- Snake game overlay -->
+<div id="snake-overlay" aria-hidden="true">
+  <canvas id="snake-canvas"></canvas>
+</div>
+<div id="snake-msg">
+  <div id="snake-msg-text"></div>
+  <div class="hint" id="snake-msg-hint"></div>
+</div>
+
+<script>
+(function(){
+  /* ---------- Glass flashlight effect ---------- */
+  var glassEls = document.querySelectorAll('.glass');
+  glassEls.forEach(function(el){
+    var targetX = 50;
+    var targetY = 50;
+    var currentX = 50;
+    var currentY = 50;
+    var active = false;
+
+    function tick(){
+      currentX += (targetX - currentX) * 0.12;
+      currentY += (targetY - currentY) * 0.12;
+      el.style.setProperty('--mx', currentX + '%');
+      el.style.setProperty('--my', currentY + '%');
+      el.style.setProperty('--glow-opacity', active ? '1' : '0');
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+
+    el.addEventListener('pointermove', function(e){
+      var rect = el.getBoundingClientRect();
+      active = true;
+      targetX = ((e.clientX - rect.left) / rect.width) * 100;
+      targetY = ((e.clientY - rect.top) / rect.height) * 100;
+    });
+
+    el.addEventListener('pointerenter', function(){
+      active = true;
+    });
+
+    el.addEventListener('pointerleave', function(){
+      active = false;
+      // keep the last cursor position, just fade the glow away
+    });
+  });
+
+  /* ---------- Snake game ---------- */
+  var trigger = document.getElementById('playSnake');
+  var overlay = document.getElementById('snake-overlay');
+  var canvas = document.getElementById('snake-canvas');
+  var ctx = canvas.getContext('2d');
+  var msg = document.getElementById('snake-msg');
+  var msgText = document.getElementById('snake-msg-text');
+  var msgHint = document.getElementById('snake-msg-hint');
+
+  var CELL = 22;
+  var cols, rows, snake, dir, nextDir, food, score, timer, running;
+
+  function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    cols = Math.floor(canvas.width / CELL);
+    rows = Math.floor(canvas.height / CELL);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function randCell(){
+    return {
+      x: Math.floor(Math.random() * cols),
+      y: Math.floor(Math.random() * rows)
+    };
+  }
+
+  function resetTriggerLabel(){
+    trigger.innerHTML = 'quer jogar? clica em mim ;)';
+    trigger.classList.remove('is-playing');
+  }
+
+  function updateScoreLabel(){
+    trigger.innerHTML = 'pontuação: ' + score;
+  }
+
+  function startGame(){
+    resize();
+    snake = [
+      {x: Math.floor(cols/2), y: Math.floor(rows/2)},
+      {x: Math.floor(cols/2)-1, y: Math.floor(rows/2)},
+      {x: Math.floor(cols/2)-2, y: Math.floor(rows/2)}
+    ];
+    dir = {x:1, y:0};
+    nextDir = {x:1, y:0};
+    food = randCell();
+    score = 0;
+    running = true;
+    overlay.classList.add('active');
+    trigger.classList.add('is-playing');
+    updateScoreLabel();
+    msg.classList.remove('show');
+    clearInterval(timer);
+    timer = setInterval(tick, 110);
+    draw();
+  }
+
+  function endGame(){
+    running = false;
+    clearInterval(timer);
+    resetTriggerLabel();
+    msgText.textContent = 'fim de jogo — pontuação final: ' + score;
+    msgHint.textContent = 'clique ou aperte enter para jogar de novo · esc para sair';
+    msg.classList.add('show');
+  }
+
+  function scrollPageForSnake(){
+    var scrollAmount = 22;
+    var scrollableBottom = document.documentElement.scrollHeight - window.innerHeight;
+
+    if (dir && dir.y > 0 && window.scrollY < scrollableBottom && snake[0].y > rows * 0.72) {
+      window.scrollBy({ top: scrollAmount, left: 0, behavior: 'auto' });
+    }
+
+    if (dir && dir.y < 0 && window.scrollY > 0 && snake[0].y < rows * 0.28) {
+      window.scrollBy({ top: -scrollAmount, left: 0, behavior: 'auto' });
+    }
+  }
+
+  function tick(){
+    dir = nextDir;
+    var head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
+
+    if(head.x < 0 || head.y < 0 || head.x >= cols || head.y >= rows){
+      endGame();
+      return;
+    }
+    for(var i=0;i<snake.length;i++){
+      if(snake[i].x === head.x && snake[i].y === head.y){
+        endGame();
+        return;
+      }
+    }
+
+    snake.unshift(head);
+
+    if(head.x === food.x && head.y === food.y){
+      score++;
+      updateScoreLabel();
+      food = randCell();
+    } else {
+      snake.pop();
+    }
+
+    scrollPageForSnake();
+    draw();
+  }
+
+  function isOnRedSurface(x, y){
+    var screenX = x * CELL + CELL / 2;
+    var screenY = y * CELL + CELL / 2;
+    var topEl = document.elementFromPoint(screenX, screenY);
+
+    if (!topEl) return false;
+
+    if (topEl.closest('.site-header, .photo-tile.on-red, .cta-button')) return true;
+
+    var bg = topEl ? window.getComputedStyle(topEl).backgroundColor : '';
+    if (!bg || bg === 'rgba(0, 0, 0, 0)') return false;
+
+    var match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/i);
+    if (!match) return false;
+
+    var r = parseInt(match[1], 10);
+    var g = parseInt(match[2], 10);
+    var b = parseInt(match[3], 10);
+    return r > 140 && g < 120 && b < 120;
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+
+    var foodSurface = isOnRedSurface(food.x, food.y);
+    ctx.fillStyle = foodSurface ? '#2ee6ff' : '#fb022d';
+    ctx.fillRect(food.x*CELL+3, food.y*CELL+3, CELL-6, CELL-6);
+
+    for(var i=0;i<snake.length;i++){
+      var onRed = isOnRedSurface(snake[i].x, snake[i].y);
+      ctx.fillStyle = i===0 ? (onRed ? '#2ee6ff' : '#ffffff') : (onRed ? 'rgba(46,230,255,0.85)' : 'rgba(255,255,255,0.85)');
+      ctx.fillRect(snake[i].x*CELL+1, snake[i].y*CELL+1, CELL-2, CELL-2);
+    }
+  }
+
+  function setDir(nx, ny){
+    if(dir.x === -nx && dir.y === -ny) return; // no reversing
+    nextDir = {x:nx, y:ny};
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(overlay.classList.contains('active')){
+      if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].indexOf(e.key) !== -1){
+        e.preventDefault();
+      }
+    }
+
+    if(!running){
+      if(!overlay.classList.contains('active')) return;
+      if(e.key === 'Enter'){ startGame(); }
+      if(e.key === 'Escape'){ closeGame(); }
+      return;
+    }
+
+    switch(e.key){
+      case 'ArrowUp': case 'w': case 'W': setDir(0,-1); break;
+      case 'ArrowDown': case 's': case 'S': setDir(0,1); break;
+      case 'ArrowLeft': case 'a': case 'A': setDir(-1,0); break;
+      case 'ArrowRight': case 'd': case 'D': setDir(1,0); break;
+      case 'Escape': endGame(); closeGame(); break;
+    }
+  });
+
+  function closeGame(){
+    overlay.classList.remove('active');
+    msg.classList.remove('show');
+    resetTriggerLabel();
+    clearInterval(timer);
+  }
+
+  msg.addEventListener('click', function(){
+    if(!running) startGame();
+  });
+
+  trigger.addEventListener('click', function(){
+    if(!overlay.classList.contains('active')){
+      startGame();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
