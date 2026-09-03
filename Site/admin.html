@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel do administrador</title>
+<style>
+  :root{ --bg:#191514; --red:#fb022d; --light:#ff3a56; --white:#fff; --muted:rgba(255,255,255,.7); --line:rgba(255,255,255,.14); }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--white);font-family:"ZT Nature",sans-serif;line-height:1.4;padding:2rem 1.25rem}
+  .admin-shell{max-width:900px;margin:auto}
+  .admin-header{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:2rem;border-bottom:1px solid var(--line);padding-bottom:1.2rem}
+  h1{font-size:clamp(2rem,5vw,3.5rem);font-style:italic}
+  .back-link{color:var(--light)}
+  .panel{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:8px;padding:1.5rem}
+  .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+  label{display:grid;gap:.4rem;font-size:.9rem;color:var(--muted)}
+  label.full{grid-column:1/-1}
+  input,select,textarea{width:100%;border:1px solid var(--line);border-radius:4px;background:#241d1b;color:var(--white);padding:.8rem;font:inherit}
+  textarea{min-height:110px;resize:vertical}
+  button{border:0;border-radius:4px;background:var(--red);color:var(--white);padding:.85rem 1.2rem;font:inherit;font-weight:700;cursor:pointer}
+  button:hover{background:var(--light)}
+  .actions{display:flex;align-items:center;gap:1rem;margin-top:1.2rem}
+  #status{color:#71f0bd}
+  .saved{margin-top:2rem;display:grid;gap:.8rem}
+  .saved-item{display:flex;justify-content:space-between;align-items:center;gap:1rem;border:1px solid var(--line);padding:1rem;border-radius:4px}
+  .saved-item small{display:block;color:var(--muted);margin-top:.25rem}
+  .delete{background:transparent;border:1px solid var(--line);padding:.5rem .7rem;font-size:.85rem}
+  @media(max-width:650px){.admin-header{align-items:start;flex-direction:column}.form-grid{grid-template-columns:1fr}label.full{grid-column:auto}.saved-item{align-items:start;flex-direction:column}.delete{width:100%}}
+</style>
+</head>
+<body>
+<main class="admin-shell">
+  <header class="admin-header">
+    <div><div>portfolio / administrador</div><h1 id="formHeading">Novo post</h1></div>
+    <a class="back-link" href="index.html">voltar ao site</a>
+  </header>
+
+  <form class="panel" id="postForm">
+    <div class="form-grid">
+      <label>Tipo de conteúdo
+        <select id="type" required>
+          <option value="design">Design</option>
+          <option value="conteudo">Conteúdo</option>
+          <option value="fotografia">Fotografia</option>
+        </select>
+      </label>
+      <label>Categoria
+        <select id="category" required>
+          <option value="design">Design</option>
+        </select>
+      </label>
+      <label class="full">Título
+        <input id="title" required placeholder="Ex.: campanha de lançamento">
+      </label>
+      <label>Data
+        <input id="date" type="date" required>
+      </label>
+      <label>Imagem de capa
+        <input id="hero" required placeholder="assets/img/minha-imagem.jpg">
+      </label>
+      <label>Cliente
+        <input id="client" placeholder="Nome do cliente">
+      </label>
+      <label>Objetivo
+        <input id="goal" placeholder="O que o projeto precisava resolver">
+      </label>
+      <label>Resultado
+        <input id="result" placeholder="Resultado alcançado">
+      </label>
+      <label class="full">Descrição curta do card
+        <textarea id="description" required placeholder="Texto que aparece na listagem"></textarea>
+      </label>
+      <label class="full">Texto da página interna
+        <textarea id="brief" required placeholder="Explique o projeto. Para separar parágrafos, use uma linha em branco."></textarea>
+      </label>
+      <label class="full">Imagens adicionais (opcional, uma por linha)
+        <textarea id="gallery" placeholder="assets/img/detalhe-1.jpg&#10;assets/img/detalhe-2.jpg"></textarea>
+      </label>
+    </div>
+    <div class="actions"><button type="submit" id="submitButton">Publicar post</button><button type="button" class="delete" id="cancelEdit" hidden>Cancelar edição</button><span id="status" aria-live="polite"></span></div>
+  </form>
+
+  <section class="saved">
+    <h2>Posts disponíveis para editar</h2>
+    <div id="savedPosts"></div>
+  </section>
+</main>
+<script src="site-data.js"></script>
+<script>
+  var type = document.getElementById('type');
+  var category = document.getElementById('category');
+  var form = document.getElementById('postForm');
+  var status = document.getElementById('status');
+  var editingId = null;
+  var categoryOptions = {
+    design: [['design', 'Design']],
+    conteudo: [['conteudo', 'Conteúdo']],
+    fotografia: [['rua', 'Fotos de rua'], ['editorial', 'Fotos editoriais']]
+  };
+  var originalPosts = [
+    ['rua-em-movimento','fotografia','rua','rua em movimento','10 set 2026','assets/img/card-fotografia.jpg'],
+    ['personas-retratos','fotografia','editorial','personas & retratos','18 ago 2026','assets/img/card-design.jpg'],
+    ['luz-de-esquina','fotografia','rua','luz de esquina','05 jul 2026','assets/img/card-conteudo.jpg'],
+    ['pessoas-e-cenario','fotografia','editorial','pessoas e cenário','21 jun 2026','assets/img/card-fotografia.jpg'],
+    ['entre-o-caos-e-o-tempo','fotografia','rua','entre o caos e o tempo','30 abr 2026','assets/img/card-design.jpg'],
+    ['forma-gesto','fotografia','editorial','forma & gesto','14 mar 2026','assets/img/card-conteudo.jpg'],
+    ['identidade-visual','design','design','identidade visual para marcas que querem parecer vivas','10 ago 2026','assets/img/card-design.jpg'],
+    ['campaign-launch','design','design','direção de arte em campanhas de lançamento','02 jul 2026','assets/img/card-conteudo.jpg'],
+    ['simplicidade-fala-mais-alto','design','design','quando a simplicidade fala mais alto','18 mai 2026','assets/img/card-design.jpg'],
+    ['narrativas-visuais-em-serie','design','design','trabalhando com narrativas visuais em série','29 abr 2026','assets/img/card-fotografia.jpg'],
+    ['presenca-real','conteudo','conteudo','como criar presença real em plataformas criativas','12 set 2026','assets/img/card-conteudo.jpg'],
+    ['serie-visual-memoravel','conteudo','conteudo','o que faz uma série visual ser memorável','19 ago 2026','assets/img/card-design.jpg'],
+    ['mais-do-que-estetica','conteudo','conteudo','mais do que estética: a percepção que o trabalho transmite','07 jul 2026','assets/img/card-fotografia.jpg'],
+    ['estudos-sobre-criacao-e-rotina','conteudo','conteudo','estudos sobre criação e rotina','23 mai 2026','assets/img/card-conteudo.jpg']
+  ].map(function(item){ return { id:item[0], type:item[1], category:item[2], title:item[3], date:item[4], hero:item[5], original:true }; });
+
+  function escapeHtml(value){
+    return String(value || '').replace(/[&<>"']/g, function(character){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[character];
+    });
+  }
+
+  function updateCategories(){
+    category.innerHTML = categoryOptions[type.value].map(function(option){
+      return '<option value="' + option[0] + '">' + option[1] + '</option>';
+    }).join('');
+  }
+
+  function formatDate(value){
+    if (!value) return '';
+    return new Date(value + 'T12:00:00').toLocaleDateString('pt-BR', { day:'2-digit', month:'short', year:'numeric' });
+  }
+
+  function dateForInput(value){
+    var parts = (value || '').replace(',', '').split(' ');
+    var months = {jan:'01', fev:'02', mar:'03', abr:'04', mai:'05', jun:'06', jul:'07', ago:'08', set:'09', out:'10', nov:'11', dez:'12'};
+    return parts.length === 3 && months[parts[1]] ? parts[2] + '-' + months[parts[1]] + '-' + parts[0].padStart(2, '0') : '';
+  }
+
+  function allPosts(){
+    var saved = PortfolioData.readPosts();
+    return originalPosts.map(function(original){
+      var override = saved.find(function(post){ return post.id === original.id; });
+      return Object.assign({}, original, override || {});
+    }).concat(saved.filter(function(post){
+      return !originalPosts.some(function(original){ return original.id === post.id; });
+    }));
+  }
+
+  function fillForm(post){
+    editingId = post.id;
+    type.value = post.type;
+    updateCategories();
+    category.value = post.category;
+    document.getElementById('title').value = post.title || '';
+    document.getElementById('date').value = dateForInput(post.date);
+    document.getElementById('hero').value = post.hero || '';
+    document.getElementById('client').value = post.client || '';
+    document.getElementById('goal').value = post.goal || '';
+    document.getElementById('result').value = post.result || '';
+    document.getElementById('description').value = post.description || '';
+    document.getElementById('brief').value = (post.brief || []).join('\n\n');
+    document.getElementById('gallery').value = (post.gallery || []).join('\n');
+    document.getElementById('formHeading').textContent = 'Editar post';
+    document.getElementById('submitButton').textContent = 'Salvar alterações';
+    document.getElementById('cancelEdit').hidden = false;
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+
+  function clearForm(){
+    editingId = null;
+    form.reset();
+    updateCategories();
+    document.getElementById('formHeading').textContent = 'Novo post';
+    document.getElementById('submitButton').textContent = 'Publicar post';
+    document.getElementById('cancelEdit').hidden = true;
+  }
+
+  function renderSaved(){
+    var deleted = PortfolioData.readDeleted();
+    document.getElementById('savedPosts').innerHTML = allPosts().map(function(post){
+      var isDeleted = deleted.indexOf(post.id) !== -1;
+      return '<div class="saved-item"><div><strong>' + escapeHtml(post.title) + '</strong><small>' + escapeHtml(post.type) + ' · ' + escapeHtml(post.date) + (isDeleted ? ' · excluído' : '') + '</small></div>' +
+        (isDeleted ? '<button class="delete" data-restore="' + post.id + '" type="button">Restaurar</button>' : '<span><button class="delete" data-edit="' + post.id + '" type="button">Editar</button> <button class="delete" data-delete="' + post.id + '" type="button">Excluir</button></span>') + '</div>';
+    }).join('');
+    document.querySelectorAll('[data-edit]').forEach(function(button){
+      button.addEventListener('click', function(){ fillForm(allPosts().find(function(post){ return post.id === button.dataset.edit; })); });
+    });
+    document.querySelectorAll('[data-delete]').forEach(function(button){
+      button.addEventListener('click', function(){
+        if (confirm('Excluir este post da lista pública?')) { PortfolioData.deletePost(button.dataset.delete); renderSaved(); }
+      });
+    });
+    document.querySelectorAll('[data-restore]').forEach(function(button){
+      button.addEventListener('click', function(){ PortfolioData.restorePost(button.dataset.restore); renderSaved(); });
+    });
+  }
+
+  type.addEventListener('change', updateCategories);
+  document.getElementById('cancelEdit').addEventListener('click', clearForm);
+  form.addEventListener('submit', function(event){
+    event.preventDefault();
+    var post = {
+      id: editingId,
+      type:type.value,
+      category:category.value,
+      title:document.getElementById('title').value.trim(),
+      date:formatDate(document.getElementById('date').value),
+      hero:document.getElementById('hero').value.trim(),
+      client:document.getElementById('client').value.trim() || '—',
+      goal:document.getElementById('goal').value.trim() || '—',
+      result:document.getElementById('result').value.trim() || '—',
+      description:document.getElementById('description').value.trim(),
+      brief:document.getElementById('brief').value.trim().split(/\n\s*\n/).filter(Boolean),
+      gallery:document.getElementById('gallery').value.split('\n').map(function(path){ return path.trim(); }).filter(Boolean)
+    };
+    if (editingId) PortfolioData.upsertPost(post);
+    else PortfolioData.addPost(post);
+    status.textContent = editingId ? 'Alterações salvas.' : 'Post publicado.';
+    clearForm();
+    renderSaved();
+  });
+
+  updateCategories();
+  renderSaved();
+</script>
+</body>
+</html>
