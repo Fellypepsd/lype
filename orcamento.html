@@ -227,11 +227,10 @@
       </section>
 
       <section class="form-step" data-step="3">
-        <div class="step-heading"><h2>07. Prazo e investimento</h2><p>Estas informações me ajudam a entender o momento e o tamanho do projeto.</p></div>
+        <div class="step-heading"><h2>07. Prazo</h2><p>Estas informações me ajudam a entender o momento do projeto.</p></div>
         <div class="field-grid">
           <div class="field"><label for="startDate">Quando você gostaria de iniciar o projeto?</label><input id="startDate" type="date"></div>
           <div class="field"><label for="deadline">Existe uma data limite para a entrega?</label><input id="deadline" type="date"></div>
-          <div class="field full"><label for="budget">Qual é a faixa de investimento prevista?</label><select id="budget"><option value="">Selecione uma opção</option><option>Ainda não defini um orçamento</option><option>Até R$ 500</option><option>Entre R$ 500 e R$ 1.000</option><option>Entre R$ 1.000 e R$ 3.000</option><option>Acima de R$ 3.000</option><option>Prefiro conversar sobre o escopo primeiro</option></select></div>
           <div class="field full"><label for="additional">08. Existe alguma informação importante que ainda não foi mencionada? <span class="optional">(opcional)</span></label><textarea id="additional"></textarea></div>
         </div>
         <p class="error" id="step3Error" aria-live="polite"></p>
@@ -258,6 +257,13 @@
 
   function selectedValues(name){
     return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(function(input){ return input.value; });
+  }
+
+  function formatDateForEmail(value){
+    if (!value) return '';
+    var parts = value.split('-');
+    if (parts.length !== 3) return value;
+    return new Intl.DateTimeFormat(navigator.language || undefined).format(new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2])));
   }
 
   function showStep(step){
@@ -292,12 +298,11 @@
   });
   document.querySelectorAll('[data-back]').forEach(function(button){ button.addEventListener('click', function(){ showStep(Number(button.dataset.back)); }); });
   document.querySelectorAll('input[name="services"]').forEach(function(input){ input.addEventListener('change', updateConditionalSections); });
-
   form.addEventListener('keydown', function(event){
     if (event.key === 'Enter' && event.target.tagName !== 'TEXTAREA') event.preventDefault();
   });
 
-  form.addEventListener('submit', function(event){
+  form.addEventListener('submit', async function(event){
     event.preventDefault();
     if (currentStep !== 3 || !validateStep(1) || !validateStep(2) || !validateStep(3)) {
       if (currentStep !== 3) showStep(currentStep);
@@ -307,28 +312,55 @@
     var name = document.getElementById('name').value.trim();
     var email = document.getElementById('email').value.trim();
     var whatsapp = document.getElementById('whatsapp').value.trim();
-    var subject = encodeURIComponent('Solicitação de orçamento — ' + name);
-    var body = encodeURIComponent([
+    var fieldLabels = {
+      company:'Empresa, marca ou projeto', social:'Instagram, site ou portfólio',
+      photoType:'Tipo de trabalho fotográfico', photoLocation:'Local da fotografia', photoDate:'Data da fotografia', photoHours:'Horas de cobertura', photoBrief:'Briefing de fotografia', photoRefs:'Referências visuais',
+      designType:'Material de design', designGoal:'Objetivo do design', designIdentity:'Identidade visual existente', designFrequency:'Frequência de design', designMaterials:'Materiais de design', designRefs:'Referências de design',
+      videoFormat:'Formato do vídeo', videoCount:'Quantidade de vídeos', videoDuration:'Duração média dos vídeos', videoMaterial:'Material dos vídeos', videoFrequency:'Frequência de vídeos', videoRefs:'Referências de edição', videoStyle:'Estilo do vídeo',
+      platforms:'Plataformas de conteúdo', contentTypes:'Tipos de conteúdo', contentGoal:'Objetivo do conteúdo', contentFrequency:'Frequência de conteúdo', contentAudience:'Público e marca', unsureBrief:'Descrição do projeto', startDate:'Início desejado', deadline:'Prazo de entrega', additional:'Informações adicionais'
+    };
+    var dateFields = ['photoDate', 'startDate', 'deadline'];
+    var answers = [];
+    Object.keys(fieldLabels).forEach(function(id){
+      var fields = document.querySelectorAll('[id="' + id + '"], [name="' + id + '"]:checked');
+      var values = Array.from(fields).map(function(field){
+        var value = field.value.trim();
+        if (dateFields.indexOf(id) !== -1 && value) {
+          return formatDateForEmail(value);
+        }
+        return value;
+      }).filter(Boolean);
+      if (values.length) answers.push(fieldLabels[id] + ': ' + values.join(', '));
+    });
+    var subject = 'Solicitação de orçamento — ' + name;
+    var message = [
       'Nome: ' + name,
       'E-mail: ' + (email || 'não informado'),
       'WhatsApp: ' + (whatsapp || 'não informado'),
-      'Empresa/projeto: ' + (document.getElementById('company').value.trim() || 'não informado'),
       'Serviços: ' + services,
-      'Frequência de design: ' + (document.getElementById('designFrequency').value || 'não se aplica'),
-      'Frequência de vídeo: ' + (document.getElementById('videoFrequency').value || 'não se aplica'),
-      'Frequência de conteúdo: ' + (document.getElementById('contentFrequency').value || 'não se aplica'),
-      'Início desejado: ' + (document.getElementById('startDate').value || 'não informado'),
-      'Prazo de entrega: ' + (document.getElementById('deadline').value || 'não informado'),
-      'Investimento: ' + (document.getElementById('budget').value || 'não informado'),
+      '',
+      answers.join('\n'),
       '',
       'Informações enviadas pelo formulário online.'
-    ].join('\n'));
-    document.querySelectorAll('.form-step').forEach(function(step){ step.style.display = 'none'; });
-    document.querySelector('.progress').style.display = 'none';
-    document.getElementById('successMessage').classList.add('visible');
-    window.location.href = 'mailto:contato@fellype.com?subject=' + subject + '&body=' + body;
+    ].join('\n');
+    var error = document.getElementById('step3Error');
+    error.textContent = 'Enviando sua solicitação...';
+    try {
+      var response = await fetch('https://formsubmit.co/ajax/luisfellypeaferreira@gmail.com', {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+        body:JSON.stringify({ name:name, email:email, _subject:subject, message:message })
+      });
+      if (!response.ok) throw new Error('Falha no envio');
+      document.querySelectorAll('.form-step').forEach(function(step){ step.style.display = 'none'; });
+      document.querySelector('.progress').style.display = 'none';
+      document.getElementById('successMessage').classList.add('visible');
+    } catch (sendError) {
+      error.textContent = 'Não foi possível enviar agora. Verifique sua conexão e tente novamente.';
+    }
   });
 })();
 </script>
+<script src="language.js"></script>
 </body>
 </html>

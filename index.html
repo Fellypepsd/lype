@@ -77,12 +77,29 @@
     gap:clamp(1rem,3vw,3.6rem);
     flex-wrap:wrap;
   }
+  nav.primary-nav{
+    display:flex;
+    align-items:center;
+    gap:1.2rem;
+  }
   nav.primary-nav a{
     font-size:clamp(1rem,1.6vw,1.4rem);
     font-weight:400;
   }
   nav.primary-nav a.is-current{ font-weight:700; }
   nav.primary-nav a:hover{ opacity:0.75; }
+  .language-switch{
+    border:1px solid rgba(255,255,255,0.7);
+    border-radius:4px;
+    background:transparent;
+    color:var(--white);
+    padding:0.35rem 0.55rem;
+    font:inherit;
+    font-size:0.78rem;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .language-switch:hover{ background:rgba(255,255,255,0.16); }
 
   @media (max-width:760px){
     header.site-header{ padding:0.9rem 0; }
@@ -92,7 +109,7 @@
     }
     .logo-mark{ width:100%; justify-content:center; }
     .logo-mark img{ height:72px; }
-    nav.primary-nav{ width:100%; }
+    nav.primary-nav{ width:100%; justify-content:center; gap:0.7rem; }
     nav.primary-nav ul{
       justify-content:center;
       gap:0.8rem 1.2rem;
@@ -355,23 +372,40 @@
     gap:2.4rem 3rem;
   }
   .client-logo{
-    height:56px;
-    min-width:64px;
+    height:72px;
+    width:180px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:0.75rem;
-    font-weight:700;
-    letter-spacing:0.02em;
-    color:#8a8582;
-    border:1px dashed #d8d3ce;
+    background:#fff;
     border-radius:6px;
-    padding:0.5rem 1rem;
-    filter:grayscale(1);
-    opacity:0.75;
-    transition:opacity 0.2s ease, filter 0.2s ease;
+    padding:0.45rem 0.8rem;
+    overflow:hidden;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .client-logo:hover{ opacity:1; filter:none; }
+  a.client-logo{ color:inherit; text-decoration:none; }
+  .client-logo img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+  }
+  .client-logo.emphasis img{ transform:scale(1.35); }
+  .client-logo.dark-logo img{ filter:brightness(0); }
+  .client-logo:hover{ transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,0.12); }
+  @media (max-width:760px){
+    .client-row{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:1.4rem 1rem;
+    }
+    .client-logo{
+      width:auto;
+      height:70px;
+      padding:0.35rem;
+      overflow:visible;
+    }
+    .client-logo.emphasis img{ transform:scale(1.2); }
+  }
 
   /* ---------- CTA ---------- */
   .cta{
@@ -547,6 +581,7 @@
         <li><a href="design.html">design</a></li>
         <li><a href="conteudo.html">conteúdo</a></li>
       </ul>
+      <button class="language-switch" type="button" data-language="pt" aria-label="Mudar para inglês">EN</button>
     </nav>
   </div>
 </header>
@@ -566,11 +601,11 @@
 
         <div class="hero-card card-white glass">
           <h2>sobre mim</h2>
-          <p>Sendo um aficionado por criação, aplico meus conhecimentos colecionados ao longo da vida em frentes criativas plurais. Fotógrafo, diretor de arte, designer e criador de conteúdo, busco sempre me aprimorar e me posicionar como artista multimídia.</p>
+          <p>Sou (Luís) Fellype Ferreira, nascido e criado no Rio de Janeiro. Tenho interesses em esportes, videogames, música e tudo que envolva tecnologia e criatividade. Sou completamente apaixonado por açaí, apesar de não aceitá-los como pagamento (ainda)</p>
         </div>
 
         <div class="hero-card card-grey glass">
-          <h2>onde atuo?</h2>
+          <h2>sobre meu trabalho</h2>
           <p>Sendo um aficionado por criação, aplico meus conhecimentos colecionados ao longo da vida em frentes criativas plurais. Fotógrafo, diretor de arte, designer e criador de conteúdo, busco sempre me aprimorar e me posicionar como artista multimídia.</p>
         </div>
 
@@ -617,19 +652,19 @@
     <div class="wrap">
       <h2>[Já trabalhei com]</h2>
       <div class="client-row">
-        <div class="client-logo">logo 01</div>
-        <div class="client-logo">logo 02</div>
-        <div class="client-logo">logo 03</div>
-        <div class="client-logo">KAIAK</div>
-        <div class="client-logo">logo 05</div>
-        <div class="client-logo">logo 06</div>
-        <div class="client-logo">logo 07</div>
-        <div class="client-logo">logo 08</div>
-        <div class="client-logo">logo 09</div>
-        <div class="client-logo">logo 10</div>
-        <div class="client-logo">logo 11</div>
-        <div class="client-logo">logo 12</div>
-        <div class="client-logo">logo 13</div>
+        <a class="client-logo" href="https://www.streetleague.com/" target="_blank" rel="noopener" title="Street League Skateboarding"><img src="logotipos/logo 1.png" alt="Street League Skateboarding"></a>
+        <a class="client-logo" href="https://www.worldsurfleague.com/" target="_blank" rel="noopener" title="World Surf League"><img src="logotipos/logo 2.webp" alt="World Surf League"></a>
+        <a class="client-logo dark-logo" href="https://worldtrailraces.com/" target="_blank" rel="noopener" title="World Trail Races"><img src="logotipos/logo 3.png" alt="World Trail Races"></a>
+        <a class="client-logo dark-logo" href="https://213sports.com.br/" target="_blank" rel="noopener" title="213 Sports"><img src="logotipos/logo 4.webp" alt="213 Sports"></a>
+        <a class="client-logo" href="https://www.cesar.org.br/" target="_blank" rel="noopener" title="CESAR"><img src="logotipos/logo 5.png" alt="CESAR"></a>
+        <a class="client-logo emphasis" href="https://maisbaluarte.com.br/" target="_blank" rel="noopener" title="Baluarte"><img src="logotipos/logo 6.png" alt="Baluarte"></a>
+        <a class="client-logo emphasis" href="https://tritonworldseries.com/" target="_blank" rel="noopener" title="Triton Sports"><img src="logotipos/logo 7.avif" alt="Triton Sports"></a>
+        <a class="client-logo" href="https://www.on.com/" target="_blank" rel="noopener" title="On Running"><img src="logotipos/logo 8.webp" alt="On Running"></a>
+        <a class="client-logo" href="https://www.oi.com.br/" target="_blank" rel="noopener" title="Oi"><img src="logotipos/logo 9.jfif" alt="Oi"></a>
+        <a class="client-logo" href="https://www.bb.com.br/" target="_blank" rel="noopener" title="Banco do Brasil"><img src="logotipos/logo 10.png" alt="Banco do Brasil"></a>
+        <a class="client-logo emphasis" href="https://fiocruz.br/" target="_blank" rel="noopener" title="Fiocruz"><img src="logotipos/logo 11.png" alt="Fiocruz"></a>
+        <a class="client-logo dark-logo" href="https://tambor.biz/" target="_blank" rel="noopener" title="Tamboa"><img src="logotipos/logo 12.png" alt="Tamboa"></a>
+        <a class="client-logo" href="https://livemkt.v3a.ag/" target="_blank" rel="noopener" title="V3A"><img src="logotipos/logo 13.png" alt="V3A"></a>
       </div>
     </div>
   </section>
@@ -894,5 +929,6 @@
 })();
 </script>
 
+<script src="language.js"></script>
 </body>
 </html>
