@@ -1,0 +1,94 @@
+{
+  "posts": [
+    {
+      "id": "rua-em-movimento",
+      "title": "rua em movimento",
+      "date": "2026-09-10",
+      "category": "rua",
+      "hero": "assets/img/card-fotografia.jpg",
+      "client": "cliente 01",
+      "goal": "capturar energia urbana com honestidade visual",
+      "result": "registro documental com presença e textura",
+      "brief": [
+        "O cliente buscava imagens que traduzissem a energia da cidade sem exageros ou encenação. A proposta era criar um olhar atento ao ritmo, à luz e às pessoas, mantendo uma abordagem realista e emotiva.",
+        "A direção foi pensada para valorizar o cotidiano, os contrastes e a espontaneidade do ambiente urbano, com foco em cenas que parecem acontecer sem preparação."
+      ],
+      "gallery": ["assets/img/card-fotografia.jpg", "assets/img/card-design.jpg", "assets/img/card-conteudo.jpg"]
+    },
+    {
+      "id": "personas-retratos",
+      "title": "personas & retratos",
+      "date": "2026-08-18",
+      "category": "editorial",
+      "hero": "assets/img/card-design.jpg",
+      "client": "studio norte",
+      "goal": "mostrar personalidade sem perder sofisticação",
+      "result": "retratos com clima editorial e presença marcante",
+      "brief": [
+        "A necessidade era de retratos com um clima editorial, mas próximos da realidade das pessoas retratadas. Era importante manter a autenticidade, ao mesmo tempo em que a imagem tivesse uma leitura mais curada e premium.",
+        "A abordagem privilegiou direção leve, luz natural e uma linguagem visual que fizesse o sujeito parecer ao mesmo tempo envolvente e autêntico."
+      ],
+      "gallery": ["assets/img/card-design.jpg", "assets/img/card-fotografia.jpg", "assets/img/card-conteudo.jpg"]
+    },
+    {
+      "id": "luz-de-esquina",
+      "title": "luz de esquina",
+      "date": "2026-07-05",
+      "category": "rua",
+      "hero": "assets/img/card-conteudo.jpg",
+      "client": "projeto visual urbano",
+      "goal": "registrar o momento em que a luz muda a narrativa",
+      "result": "imagens com clima, contraste e silêncio visual",
+      "brief": [
+        "O cliente precisava de fotos que fizessem a rua parecer viva, mas também observada. O foco estava em cenas em que a luz cria tensão, mistério e identidade, sem perder a sensação de espontaneidade.",
+        "O trabalho se concentrou em ângulos simples, atenção ao contraste e na composição do vazio em torno das pessoas e objetos."
+      ],
+      "gallery": ["assets/img/card-conteudo.jpg", "assets/img/card-fotografia.jpg", "assets/img/card-design.jpg"]
+    },
+    {
+      "id": "pessoas-e-cenario",
+      "title": "pessoas e cenário",
+      "date": "2026-06-21",
+      "category": "editorial",
+      "hero": "assets/img/card-fotografia.jpg",
+      "client": "marca de moda",
+      "goal": "conectar o retrato ao ambiente de forma elegante",
+      "result": "narrativa visual com equilíbrio entre figura e cenário",
+      "brief": [
+        "O projeto pedia imagens que unissem a presença da pessoa ao cenário que a envolve, como parte da mesma história. A estética deveria ser forte, mas sempre com a presença do sujeito como centro da leitura.",
+        "Foi trabalhado um diálogo entre arquitetura, roupa, movimento e expressão para construir uma composição que parecesse natural e pensada ao mesmo tempo."
+      ],
+      "gallery": ["assets/img/card-fotografia.jpg", "assets/img/card-design.jpg", "assets/img/card-conteudo.jpg"]
+    },
+    {
+      "id": "entre-o-caos-e-o-tempo",
+      "title": "entre o caos e o tempo",
+      "date": "2026-04-30",
+      "category": "rua",
+      "hero": "assets/img/card-design.jpg",
+      "client": "relato visual",
+      "goal": "capturar movimento, ruído e pausa em uma mesma sequência",
+      "result": "coleção com caráter documental e contemporâneo",
+      "brief": [
+        "O cliente queria uma série que mostrasse como a rua oferece simultaneamente caos, rotina e pausa. Não era sobre documentar tudo, mas sim observar aquilo que sobra na imagem.",
+        "O necessário era um conjunto de fotografias com coerência visual, mas com variação de planos e atmosferas para manter a narrativa em movimento."
+      ],
+      "gallery": ["assets/img/card-design.jpg", "assets/img/card-fotografia.jpg", "assets/img/card-conteudo.jpg"]
+    },
+    {
+      "id": "forma-gesto",
+      "title": "forma & gesto",
+      "date": "2026-03-14",
+      "category": "editorial",
+      "hero": "assets/img/card-conteudo.jpg",
+      "client": "projeto de arte & cultura",
+      "goal": "valorização do corpo, da expressão e do movimento",
+      "result": "imagens com energia, minimalismo e presença forte",
+      "brief": [
+        "A ideia era compor imagens mais sensíveis e gráficas, onde o gesto e a forma ganham protagonismo. A direção não queria uma estética excessivamente trabalhada, mas uma leitura visual pensada e firme.",
+        "As fotografias buscaram combinar composição arquitetônica, postura e tempo para criar uma sensação de presença sem excesso."
+      ],
+      "gallery": ["assets/img/card-conteudo.jpg", "assets/img/card-fotografia.jpg", "assets/img/card-design.jpg"]
+    }
+  ]
+}

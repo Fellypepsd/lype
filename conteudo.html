@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>design — fel[lype] ferreira</title>
+<title>conteúdo — fel[lype] ferreira</title>
 <style>
   :root{
     --bg-dark: #191514;
@@ -83,10 +83,10 @@
   .meta{ font-family:var(--font-pixel); font-size:0.56rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--accent-red-light); margin-bottom:0.6rem; }
   .post-content h2{ font-size:clamp(1.35rem,2.4vw,2.1rem); line-height:1.06; font-weight:700; font-style:italic; margin-bottom:0.6rem; }
   .post-content p{ opacity:0.82; font-size:1rem; max-width:52ch; }
-  .thumb-a{ background-image:url('assets/img/card-design.jpg'); }
-  .thumb-b{ background-image:url('assets/img/card-conteudo.jpg'); }
-  .thumb-c{ background-image:url('assets/img/card-design.jpg'); }
-  .thumb-d{ background-image:url('assets/img/card-fotografia.jpg'); }
+  .thumb-a{ background-image:url('conteúdo.jpg'); }
+  .thumb-b{ background-image:url('assets/img/card-design.jpg'); }
+  .thumb-c{ background-image:url('assets/img/card-fotografia.jpg'); }
+  .thumb-d{ background-image:url('conteúdo.jpg'); }
 
   @media (max-width:720px){
     .post-card{ grid-template-columns:1fr; }
@@ -105,8 +105,8 @@
       <ul>
         <li><a href="index.html">início</a></li>
         <li><a href="fotografia.html">fotografia</a></li>
-        <li><a href="design.html" class="is-current">design</a></li>
-        <li><a href="conteudo.html">conteúdo</a></li>
+        <li><a href="design.html">design</a></li>
+        <li><a href="conteudo.html" class="is-current">conteúdo</a></li>
       </ul>
     </nav>
   </div>
@@ -115,9 +115,9 @@
 <main class="page-shell">
   <div class="wrap">
     <div class="page-header">
-      <div class="eyebrow">portfolio / design</div>
-      <h1>design</h1>
-      <p>Projetos, estudos visuais e reflexões de direção de arte em um fluxo editorial.</p>
+      <div class="eyebrow">portfolio / conteúdo</div>
+      <h1>conteúdo</h1>
+      <p>Textos, ideias e reflexões organizadas para serem lidas, compartilhadas e revisitadas.</p>
     </div>
 
     <div class="posts-list" id="postsList"></div>
@@ -132,12 +132,12 @@
 
   PortfolioData.ready.then(function(){
     var list = document.getElementById('postsList');
-    list.innerHTML = PortfolioData.getPostsByType('design').map(function(post){
+    list.innerHTML = PortfolioData.getPostsByType('conteudo').map(function(post){
       var thumbInner = PortfolioData.isVideo(post.hero)
         ? '<video src="' + escapeHtml(post.hero) + '" muted playsinline></video>'
         : '';
       var thumbStyle = PortfolioData.isVideo(post.hero) ? '' : ' style="background-image:url(\'' + escapeHtml(post.hero) + '\')"';
-      return '<a class="post-card" href="portfolio-detail.html?type=design&id=' + encodeURIComponent(post.id) + '">' +
+      return '<a class="post-card" href="portfolio-detail.html?type=conteudo&id=' + encodeURIComponent(post.id) + '">' +
         '<div class="post-thumb"' + thumbStyle + ' aria-label="' + escapeHtml(post.title) + '">' + thumbInner + '</div>' +
         '<div class="post-content"><div class="meta">' + escapeHtml(post.displayDate) + '</div><h2>' + escapeHtml(post.title) + '</h2><p>' + escapeHtml(post.description) + '</p></div>' +
         '</a>';

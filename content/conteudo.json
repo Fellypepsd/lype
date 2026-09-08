@@ -1,0 +1,64 @@
+{
+  "posts": [
+    {
+      "id": "presenca-real",
+      "title": "como criar presença real em plataformas criativas",
+      "date": "2026-09-12",
+      "hero": "assets/img/card-conteudo.jpg",
+      "description": "Uma visão prática sobre consistência, linguagem e autenticidade na construção de uma presença digital.",
+      "client": "criadores digitais",
+      "goal": "construir presença digital clara e autêntica",
+      "result": "conteúdo com identidade forte e consistência",
+      "brief": [
+        "O cliente precisava de um texto que ajudasse criadores a construir presença sem ficar repetitivos ou genéricos. A ideia era mostrar que autenticidade e consistência precisam andar juntas.",
+        "O texto foi pensado para facilitar a leitura, orientar decisões e reforçar a importância de um posicionamento claro e uma linguagem coesa."
+      ],
+      "gallery": ["assets/img/card-conteudo.jpg", "assets/img/card-design.jpg", "assets/img/card-fotografia.jpg"]
+    },
+    {
+      "id": "serie-visual-memoravel",
+      "title": "o que faz uma série visual ser memorável",
+      "date": "2026-08-19",
+      "hero": "assets/img/card-design.jpg",
+      "description": "Entendendo como repetição estratégica, contraste e narrativa ajudam uma sequência a ganhar identidade.",
+      "client": "produtora de conteúdo",
+      "goal": "explicar o que torna uma sequência visual marcante",
+      "result": "texto com apelo prático e visual",
+      "brief": [
+        "A demanda era escrever sobre como uma série visual ganha presença e memorabilidade sem depender de excesso. O objetivo era unir teoria e aplicação prática em um texto acessível.",
+        "A estrutura foi organizada para mostrar que repetição inteligente, contraste e narrativa são mais importantes do que quantidade de elementos."
+      ],
+      "gallery": ["assets/img/card-design.jpg", "assets/img/card-conteudo.jpg", "assets/img/card-fotografia.jpg"]
+    },
+    {
+      "id": "mais-do-que-estetica",
+      "title": "mais do que estética: a percepção que o trabalho transmite",
+      "date": "2026-07-07",
+      "hero": "assets/img/card-fotografia.jpg",
+      "description": "Sobre o papel da intenção visual e do contexto na leitura emocional de uma peça.",
+      "client": "espaço de cultura",
+      "goal": "explicar como a percepção muda a leitura de uma peça",
+      "result": "texto com foco em contexto e mensagem",
+      "brief": [
+        "A proposta era ampliar a discussão sobre estética e percepção, mostrando que o que a obra comunica depende muito do contexto e da intenção. O texto buscava ser reflexivo e útil ao mesmo tempo.",
+        "A linguagem foi pensada para conectar a visão criativa com a compreensão do público, reforçando a função do trabalho como comunicação."
+      ],
+      "gallery": ["assets/img/card-fotografia.jpg", "assets/img/card-design.jpg", "assets/img/card-conteudo.jpg"]
+    },
+    {
+      "id": "estudos-sobre-criacao-e-rotina",
+      "title": "estudos sobre criação e rotina",
+      "date": "2026-05-23",
+      "hero": "assets/img/card-conteudo.jpg",
+      "description": "Reflexões sobre disciplina, processo criativo e a importância de uma linha clara de pensamento.",
+      "client": "blog de criatividade",
+      "goal": "conectar processo criativo e rotina sem perder sensibilidade",
+      "result": "conteúdo reflexivo com uma leitura de fácil absorção",
+      "brief": [
+        "O cliente buscava um texto que conectasse rotina, disciplina e criação de maneira honesta e útil. O foco era a constância, não o perfeccionismo.",
+        "A estrutura foi pensada para ser simples, inspiradora e objetiva, com linguagem que ajudasse o leitor a refletir sobre o próprio processo."
+      ],
+      "gallery": ["assets/img/card-conteudo.jpg", "assets/img/card-design.jpg", "assets/img/card-fotografia.jpg"]
+    }
+  ]
+}

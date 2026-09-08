@@ -1,0 +1,64 @@
+{
+  "posts": [
+    {
+      "id": "identidade-visual",
+      "title": "identidade visual para marcas que querem parecer vivas",
+      "date": "2026-08-10",
+      "hero": "assets/img/card-design.jpg",
+      "description": "Como construir uma linguagem visual que comunica personalidade, clareza e presença sem perder a delicadeza.",
+      "client": "marca nova",
+      "goal": "criar uma identidade visual que traduzisse energia e clareza",
+      "result": "sistema visual flexível e contemporâneo",
+      "brief": [
+        "O cliente queria uma marca com personalidade marcante, mas sem parecer genérica ou excessivamente polida. O objetivo era construir uma linguagem visual que fizesse a empresa parecer presente, humana e memorável.",
+        "Foi desenvolvido um sistema com contraste, ritmo e identidade com foco em clareza e em peças que funcionassem em diferentes contextos."
+      ],
+      "gallery": ["assets/img/card-design.jpg", "assets/img/card-conteudo.jpg", "assets/img/card-fotografia.jpg"]
+    },
+    {
+      "id": "campaign-launch",
+      "title": "direção de arte em campanhas de lançamento",
+      "date": "2026-07-02",
+      "hero": "assets/img/card-conteudo.jpg",
+      "description": "Uma revisão prática sobre ritmo visual, composição e escolha de materiais para criar campanhas com impacto.",
+      "client": "empresa de produto",
+      "goal": "criar expectativa e diferenciar o lançamento",
+      "result": "campanha com linguagem forte e boa assimilação digital",
+      "brief": [
+        "A empresa precisava de uma campanha capaz de comunicar novidade com clareza e apelo visual, sem cair em excesso de informação. O objetivo era transformar o lançamento em um momento com identidade clara.",
+        "A execução levou em conta equilíbrio entre foto, tipografia, ritmo e mensagem, criando um conjunto com energia e coesão."
+      ],
+      "gallery": ["assets/img/card-conteudo.jpg", "assets/img/card-design.jpg", "assets/img/card-fotografia.jpg"]
+    },
+    {
+      "id": "simplicidade-fala-mais-alto",
+      "title": "quando a simplicidade fala mais alto",
+      "date": "2026-05-18",
+      "hero": "assets/img/card-design.jpg",
+      "description": "Explorando o uso de espaço, contraste e hierarquia para construir sistemas mais fortes.",
+      "client": "projeto de branding",
+      "goal": "reduzir ruído visual para fortalecer a mensagem",
+      "result": "sistema mais forte e de leitura imediata",
+      "brief": [
+        "O projeto tinha como desafio mostrar que menos pode ser mais. A proposta era trabalhar com espaço, contraste e ritmo para criar uma comunicação mais segura e direta.",
+        "Com um olhar mais editorial, a solução foi simplificar a composição, mantendo a personalidade da marca sem perder a profundidade da mensagem."
+      ],
+      "gallery": ["assets/img/card-design.jpg", "assets/img/card-fotografia.jpg", "assets/img/card-conteudo.jpg"]
+    },
+    {
+      "id": "narrativas-visuais-em-serie",
+      "title": "trabalhando com narrativas visuais em série",
+      "date": "2026-04-29",
+      "hero": "assets/img/card-fotografia.jpg",
+      "description": "Um olhar sobre como manter consistência em projetos que precisam evoluir sem perder a sua identidade.",
+      "client": "espaço editorial",
+      "goal": "manter consistência ao longo de uma sequência visual",
+      "result": "séries coesas e com leitura clara",
+      "brief": [
+        "A necessidade era de uma série visual que se mantivesse integrada, mesmo com variações de conteúdo e contexto. O objetivo era criar consistência sem cair em repetição mecânica.",
+        "A solução foi estabelecer uma base visual forte e usar pequenas mudanças de escala, cor e composição para mantê-la viva e funcional."
+      ],
+      "gallery": ["assets/img/card-fotografia.jpg", "assets/img/card-design.jpg", "assets/img/card-conteudo.jpg"]
+    }
+  ]
+}

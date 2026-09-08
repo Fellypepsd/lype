@@ -1,0 +1,3 @@
+[build]
+  publish = "."
+  command = "echo 'Sem build necessário — site 100% estático'"
