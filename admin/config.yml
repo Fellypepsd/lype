@@ -17,17 +17,58 @@ collections:
         label: "Posts de Design"
         file: "content/design.json"
         fields:
-          - { label: "Posts", name: "posts", widget: "list", label_singular: "Post", summary: "{{fields.title}}", fields:
-              - { label: "Título", name: "title", widget: "string" }
-              - { label: "Data", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
-              - { label: "Imagem ou vídeo de capa", name: "hero", widget: "file" }
-              - { label: "Descrição curta (aparece na listagem)", name: "description", widget: "text" }
-              - { label: "Cliente", name: "client", widget: "string", required: false }
-              - { label: "Objetivo", name: "goal", widget: "string", required: false }
-              - { label: "Resultado", name: "result", widget: "string", required: false }
-              - { label: "Texto do projeto (parágrafos)", name: "brief", widget: "list", field: { label: "Parágrafo", name: "paragraph", widget: "text" } }
-              - { label: "Galeria (imagens ou vídeos)", name: "gallery", widget: "list", field: { label: "Arquivo", name: "item", widget: "file" }, required: false }
-            }
+          - label: "Posts"
+            name: "posts"
+            widget: "list"
+            label_singular: "Post"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "ID (não repetir, sem espaço)"
+                name: "id"
+                widget: "string"
+                pattern: ["^[a-z0-9-]+$", "use só letras minúsculas, números e hífen"]
+              - label: "Título"
+                name: "title"
+                widget: "string"
+              - label: "Data"
+                name: "date"
+                widget: "datetime"
+                format: "YYYY-MM-DD"
+                date_format: "YYYY-MM-DD"
+                time_format: false
+              - label: "Imagem ou vídeo de capa"
+                name: "hero"
+                widget: "file"
+              - label: "Descrição curta (aparece na listagem)"
+                name: "description"
+                widget: "text"
+              - label: "Cliente"
+                name: "client"
+                widget: "string"
+                required: false
+              - label: "Objetivo"
+                name: "goal"
+                widget: "string"
+                required: false
+              - label: "Resultado"
+                name: "result"
+                widget: "string"
+                required: false
+              - label: "Texto do projeto (parágrafos)"
+                name: "brief"
+                widget: "list"
+                field:
+                  label: "Parágrafo"
+                  name: "paragraph"
+                  widget: "text"
+              - label: "Galeria (imagens ou vídeos)"
+                name: "gallery"
+                widget: "list"
+                field:
+                  label: "Arquivo"
+                  name: "item"
+                  widget: "file"
+                required: false
 
   - name: "conteudo"
     label: "Conteúdo"
@@ -37,18 +78,58 @@ collections:
         label: "Posts de Conteúdo"
         file: "content/conteudo.json"
         fields:
-          - { label: "Posts", name: "posts", widget: "list", label_singular: "Post", summary: "{{fields.title}}", fields:
-              - { label: "ID (não repetir, sem espaço)", name: "id", widget: "string", pattern: ['^[a-z0-9-]+$', "use só letras minúsculas, números e hífen"] }
-              - { label: "Título", name: "title", widget: "string" }
-              - { label: "Data", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
-              - { label: "Imagem ou vídeo de capa", name: "hero", widget: "file" }
-              - { label: "Descrição curta (aparece na listagem)", name: "description", widget: "text" }
-              - { label: "Cliente", name: "client", widget: "string", required: false }
-              - { label: "Objetivo", name: "goal", widget: "string", required: false }
-              - { label: "Resultado", name: "result", widget: "string", required: false }
-              - { label: "Texto do projeto (parágrafos)", name: "brief", widget: "list", field: { label: "Parágrafo", name: "paragraph", widget: "text" } }
-              - { label: "Galeria (imagens ou vídeos)", name: "gallery", widget: "list", field: { label: "Arquivo", name: "item", widget: "file" }, required: false }
-            }
+          - label: "Posts"
+            name: "posts"
+            widget: "list"
+            label_singular: "Post"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "ID (não repetir, sem espaço)"
+                name: "id"
+                widget: "string"
+                pattern: ["^[a-z0-9-]+$", "use só letras minúsculas, números e hífen"]
+              - label: "Título"
+                name: "title"
+                widget: "string"
+              - label: "Data"
+                name: "date"
+                widget: "datetime"
+                format: "YYYY-MM-DD"
+                date_format: "YYYY-MM-DD"
+                time_format: false
+              - label: "Imagem ou vídeo de capa"
+                name: "hero"
+                widget: "file"
+              - label: "Descrição curta (aparece na listagem)"
+                name: "description"
+                widget: "text"
+              - label: "Cliente"
+                name: "client"
+                widget: "string"
+                required: false
+              - label: "Objetivo"
+                name: "goal"
+                widget: "string"
+                required: false
+              - label: "Resultado"
+                name: "result"
+                widget: "string"
+                required: false
+              - label: "Texto do projeto (parágrafos)"
+                name: "brief"
+                widget: "list"
+                field:
+                  label: "Parágrafo"
+                  name: "paragraph"
+                  widget: "text"
+              - label: "Galeria (imagens ou vídeos)"
+                name: "gallery"
+                widget: "list"
+                field:
+                  label: "Arquivo"
+                  name: "item"
+                  widget: "file"
+                required: false
 
   - name: "fotografia"
     label: "Fotografia"
@@ -58,15 +139,60 @@ collections:
         label: "Posts de Fotografia"
         file: "content/fotografia.json"
         fields:
-          - { label: "Posts", name: "posts", widget: "list", label_singular: "Post", summary: "{{fields.title}}", fields:
-              - { label: "ID (não repetir, sem espaço)", name: "id", widget: "string", pattern: ['^[a-z0-9-]+$', "use só letras minúsculas, números e hífen"] }
-              - { label: "Título", name: "title", widget: "string" }
-              - { label: "Data", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
-              - { label: "Categoria", name: "category", widget: "select", options: [{ label: "Fotos de rua", value: "rua" }, { label: "Fotos editoriais", value: "editorial" }] }
-              - { label: "Imagem ou vídeo de capa", name: "hero", widget: "file" }
-              - { label: "Cliente", name: "client", widget: "string", required: false }
-              - { label: "Objetivo", name: "goal", widget: "string", required: false }
-              - { label: "Resultado", name: "result", widget: "string", required: false }
-              - { label: "Texto do projeto (parágrafos)", name: "brief", widget: "list", field: { label: "Parágrafo", name: "paragraph", widget: "text" } }
-              - { label: "Galeria (imagens ou vídeos)", name: "gallery", widget: "list", field: { label: "Arquivo", name: "item", widget: "file" }, required: false }
-            }
+          - label: "Posts"
+            name: "posts"
+            widget: "list"
+            label_singular: "Post"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "ID (não repetir, sem espaço)"
+                name: "id"
+                widget: "string"
+                pattern: ["^[a-z0-9-]+$", "use só letras minúsculas, números e hífen"]
+              - label: "Título"
+                name: "title"
+                widget: "string"
+              - label: "Data"
+                name: "date"
+                widget: "datetime"
+                format: "YYYY-MM-DD"
+                date_format: "YYYY-MM-DD"
+                time_format: false
+              - label: "Categoria"
+                name: "category"
+                widget: "select"
+                options:
+                  - label: "Fotos de rua"
+                    value: "rua"
+                  - label: "Fotos editoriais"
+                    value: "editorial"
+              - label: "Imagem ou vídeo de capa"
+                name: "hero"
+                widget: "file"
+              - label: "Cliente"
+                name: "client"
+                widget: "string"
+                required: false
+              - label: "Objetivo"
+                name: "goal"
+                widget: "string"
+                required: false
+              - label: "Resultado"
+                name: "result"
+                widget: "string"
+                required: false
+              - label: "Texto do projeto (parágrafos)"
+                name: "brief"
+                widget: "list"
+                field:
+                  label: "Parágrafo"
+                  name: "paragraph"
+                  widget: "text"
+              - label: "Galeria (imagens ou vídeos)"
+                name: "gallery"
+                widget: "list"
+                field:
+                  label: "Arquivo"
+                  name: "item"
+                  widget: "file"
+                required: false
